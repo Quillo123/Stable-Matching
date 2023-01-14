@@ -1,6 +1,12 @@
-﻿
+﻿//Stable Matching 
+//Author: Noah Gallo
+//In partial completion of SPU CSC3430
+//final Algorithm Time Complexity O(n^2)
 
+
+//Setup
 Console.WriteLine("Stable Matching Algorithm Sample");
+
 
 Console.WriteLine("File Path: ");
 string filename = Console.ReadLine();
@@ -29,6 +35,12 @@ for (int i = 0; i < count; i++)
 
 
 //Stable Matching Algorithm
+//Time Complexity O(n^2)
+
+//Would the removing and adding back of free men modify the time complexity, 
+//since we will end up doing the same person twice? My assumption would be that since it's
+//addition, it should still only be O(n), thus, the final complexity is O(n^2), due to the 
+//O(n) time complexity of "PrefersToCurrent";
 while(freeMen.Count > 0) { 
     var man = freeMen.First().Value;
     string w = man.nextPreferrence();
@@ -155,29 +167,6 @@ public class Man
     public Man(string s)
     {
         LoadManFromString(s);
-    }
-
-    public bool isFree = true;
-
-    public bool PrefersToCurrent(string A, out int index)
-    {
-        for(int i = curr; i < preferences.Count; i++)
-        {
-            if(preferences[i] == A)
-            {
-                index = i;
-                return true;
-            }
-            else if (preferences[i] == CurrentPartner)
-            {
-                index = -1;
-                return false;
-            }
-        }
-
-        Console.WriteLine("Person \"" + A + "\" were found in \"" + id + "\" preferences");
-        index = -1;
-        return false;
     }
 
     public bool LoadManFromString(string s)
